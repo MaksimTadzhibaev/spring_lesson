@@ -16,16 +16,16 @@ public class BootstrapListener implements ServletContextListener {
         ServletContext sc = sce.getServletContext();
 
         ProductRepository productRepository = new ProductRepository();
-        productRepository.save(new Product(1L,"Product1", 100));
-        productRepository.save(new Product(2L,"Product2", 200));
-        productRepository.save(new Product(3L,"Product3", 300));
-        productRepository.save(new Product(4L,"Product4", 400));
-        productRepository.save(new Product(5L,"Product5", 500));
-        productRepository.save(new Product(6L,"Product6", 600));
-        productRepository.save(new Product(7L,"Product7", 700));
-        productRepository.save(new Product(8L,"Product8", 800));
-        productRepository.save(new Product(9L,"Product9", 900));
-        productRepository.save(new Product(10L,"Product10", 1000));
+        productRepository.save(new Product(1L,"apricot", 200));
+        productRepository.save(new Product(2L,"banana", 60));
+        productRepository.save(new Product(3L,"cherry", 350));
+        productRepository.save(new Product(4L,"grape", 150));
+        productRepository.save(new Product(5L,"lemon", 100));
+        productRepository.save(new Product(6L,"pear", 170));
+        productRepository.save(new Product(7L,"plum", 400));
+        productRepository.save(new Product(8L,"strawberry", 300));
+        productRepository.save(new Product(9L,"raspberry", 250));
+        productRepository.save(new Product(10L,"watermelon", 700));
 
 
         sc.setAttribute("productRepository", productRepository);
