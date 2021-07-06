@@ -17,7 +17,8 @@
 
     <modules>
         <module>lesson1</module>
-        <module>lesson(spring)2.2</module>
+        <module>lesson-spring-2.2</module>
+        <module>lesson-spring-3</module>
     </modules>
 
 </project>
