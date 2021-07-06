@@ -19,6 +19,7 @@
         <module>lesson1</module>
         <module>lesson-spring-2.2</module>
         <module>lesson-spring-3</module>
+        <module>lesson-springboot-4</module>
     </modules>
 
 </project>
