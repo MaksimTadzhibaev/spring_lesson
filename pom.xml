@@ -20,6 +20,7 @@
         <module>lesson-spring-2.2</module>
         <module>lesson-spring-3</module>
         <module>lesson-springboot-4</module>
+        <module>lesson-hibernate-5</module>
     </modules>
 
 </project>
