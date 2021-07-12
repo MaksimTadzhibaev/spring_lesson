@@ -10,7 +10,6 @@ import ru.MaksimTadzhibaev.entity.Product;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-@ComponentScan("ru.MaksimTadzhibaev")
 public class AppConfig {
 
     //    бин для EMF
