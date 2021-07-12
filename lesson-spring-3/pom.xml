@@ -67,9 +67,9 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://194.67.93.77:8080/manager/text</url>
-                    <username>miromaxel</username>
-                    <password>182824</password>
+                    <url>http://localhost:8080/manager/text</url>
+                    <username>admin</username>
+                    <password>admin</password>
                     <path>/spring-app</path>
                 </configuration>
             </plugin>
