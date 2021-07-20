@@ -24,6 +24,8 @@
         <module>lesson-hibernate-6</module>
         <module>lesson-springdata-7</module>
         <module>lesson-thymeleaf-8</module>
+        <module>lesson-rest1-9</module>
+
     </modules>
 
 </project>
