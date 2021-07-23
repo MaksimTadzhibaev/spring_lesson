@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "http://194.67.93.77:8080/spring-app",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
