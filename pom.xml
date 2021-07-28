@@ -25,6 +25,7 @@
         <module>lesson-springdata-7</module>
         <module>lesson-thymeleaf-8</module>
         <module>lesson-rest1-9</module>
+        <module>lesson-springsecurity-11</module>
 
     </modules>
 
