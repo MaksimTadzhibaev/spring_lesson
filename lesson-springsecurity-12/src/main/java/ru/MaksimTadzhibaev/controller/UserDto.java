@@ -1,37 +1,43 @@
-package ru.MaksimTadzhibaev.persist;
+package ru.MaksimTadzhibaev.controller;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
-import javax.persistence.*;
+public class UserDto {
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank
     private String username;
 
-    @Column
-    private String password;
-
-    @Column
-    private String repeatPassword;
-
-    @Column(nullable = false)
+    @Max(value = 120)
+    @Min(value = 18)
     private Integer age;
 
-    public User() {
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    private String repeatPassword;
+
+    private Set<RoleDto> roles;
+
+    public UserDto() {
     }
 
-    public User(Long id, String username, String password, String repeatPassword, Integer age) {
+    public UserDto(Long id, String username, Integer age) {
         this.id = id;
         this.username = username;
-        this.password = password;
-        this.repeatPassword=repeatPassword;
         this.age = age;
+    }
+
+    public UserDto(Long id, String username, Integer age, Set<RoleDto> roles) {
+        this.id = id;
+        this.username = username;
+        this.age = age;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -72,5 +78,13 @@ public class User {
 
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
+    }
+
+    public Set<RoleDto> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDto> roles) {
+        this.roles = roles;
     }
 }

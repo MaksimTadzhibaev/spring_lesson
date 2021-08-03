@@ -7,33 +7,37 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.MaksimTadzhibaev.controller.RoleDto;
 import ru.MaksimTadzhibaev.controller.UserDto;
 import ru.MaksimTadzhibaev.controller.UserListParams;
-import ru.MaksimTadzhibaev.persist.User;
-import ru.MaksimTadzhibaev.persist.UserRepository;
-import ru.MaksimTadzhibaev.persist.UserSpecifications;
+import ru.MaksimTadzhibaev.persist.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+                           RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public List<UserDto> findAll() {
         return userRepository.findAll().stream()
-                .map(user -> new UserDto(user.getId(), user.getUsername(), user.getAge()))
+                .map(user -> new UserDto(user.getId(),
+                        user.getUsername(),
+                        user.getAge()))
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +51,7 @@ public class UserServiceImpl implements UserService {
         if (userListParams.getMinAge() != null) {
             spec = spec.and(UserSpecifications.minAge(userListParams.getMinAge()));
         }
-        if (userListParams.getMaxAge() != null ) {
+        if (userListParams.getMaxAge() != null) {
             spec = spec.and(UserSpecifications.maxAge(userListParams.getMaxAge()));
         }
 
@@ -64,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDto> findById(Long id) {
         return userRepository.findById(id)
-                .map(user -> new UserDto(user.getId(), user.getUsername(), user.getAge()));
+                .map(user -> new UserDto(user.getId(), user.getUsername(), user.getAge(), mapRolesDto(user)));
     }
 
     @Override
@@ -73,13 +77,21 @@ public class UserServiceImpl implements UserService {
                 userDto.getId(),
                 userDto.getUsername(),
                 passwordEncoder.encode(userDto.getPassword()),
-                passwordEncoder.encode(userDto.getRepeatPassword()),
-                userDto.getAge());
+                userDto.getAge(),
+                userDto.getRoles().stream()
+                        .map(roleDto -> new Role(roleDto.getId(), roleDto.getName()))
+                        .collect(Collectors.toSet()));
         userRepository.save(user);
     }
 
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    private static Set<RoleDto> mapRolesDto(User user) {
+        return user.getRoles().stream()
+                .map(role -> new RoleDto(role.getId(), role.getName()))
+                .collect(Collectors.toSet());
     }
 }
