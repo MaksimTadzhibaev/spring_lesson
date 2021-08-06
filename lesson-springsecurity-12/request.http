@@ -1,0 +1,36 @@
+GET http://localhost:8080/spring-security-app/api/v1/product/all
+Authorization: Basic maxim 123
+
+###
+
+GET http://localhost:8080/spring-security-app/api/v1/product/5
+Authorization: Basic maxim 123
+
+###
+
+POST http://localhost:8080/spring-security-app/api/v1/product
+Content-Type: application/json
+
+{
+  "title": "pamello",
+  "cost": 110
+}
+
+###
+
+GET http://localhost:8080/spring-security-app/api/v1/product/7
+
+###
+
+PUT http://localhost:8080/spring-security-app/api/v1/product
+Content-Type: application/json
+
+{
+  "id": 7,
+  "title": "pamello",
+  "cost": 140
+}
+
+###
+
+DELETE http://localhost:8080/spring-security-app/api/v1/product/12

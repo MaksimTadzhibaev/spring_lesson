@@ -1,6 +1,7 @@
 package ru.MaksimTadzhibaev.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import ru.MaksimTadzhibaev.persist.Role;
 import ru.MaksimTadzhibaev.persist.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -33,7 +35,7 @@ public class UserAuthService implements UserDetailsService {
                 .map(user -> new User(
                         user.getUsername(),
                         user.getPassword(),
-                        Collections.singletonList(new SimpleGrantedAuthority("SUPER_ADMIN"))
+                        user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
                 ))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
